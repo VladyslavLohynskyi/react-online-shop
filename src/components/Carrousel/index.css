@@ -1,0 +1,27 @@
+.containerCarrousel {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+div.containerCarrousel img {
+  width: 400px;
+  height: 100%;
+}
+
+div.containerCarrousel div {
+  width: 400px;
+  height: 100%;
+}
+
+.slide {
+  display: none;
+}
+
+.slide.active {
+  display: contents;
+}
