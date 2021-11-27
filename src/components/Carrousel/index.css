@@ -23,5 +23,6 @@ div.containerCarrousel div {
 }
 
 .slide.active {
+  width: 400px;
   display: contents;
 }
