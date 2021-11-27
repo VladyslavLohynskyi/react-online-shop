@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-import babyYoda from "../assets/baby-yoda.svg";
-import girl from "../assets/girl.svg";
 import "semantic-ui-css/semantic.min.css";
 import { Icon } from "semantic-ui-react";
 import "./index.css";
@@ -18,8 +16,8 @@ const Carrousel = () => {
       <p>Buy with discount today</p>
       <button>Start shopping</button>
     </div>,
-    <img src={babyYoda} />,
-    <img src={girl} />,
+    <img src="/assets/baby-yoda.svg" />,
+    <img src="../assets/girl.svg" s />,
   ];
 
   const nextSlider = () => {
