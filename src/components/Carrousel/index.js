@@ -29,7 +29,7 @@ const Carrousel = () => {
   };
   const prevSlider = () => {
     if (current === 0) {
-      setCurrent(slides.length);
+      setCurrent(slides.length - 1);
     } else {
       setCurrent(current - 1);
     }
@@ -44,7 +44,10 @@ const Carrousel = () => {
 
   return (
     <div className="containerCarrousel">
-      <button onClick={prevSlider}>
+      <button
+        style={{ border: "none", backgroundColor: "transparent" }}
+        onClick={prevSlider}
+      >
         <Icon
           disabled
           size="huge"
@@ -60,7 +63,10 @@ const Carrousel = () => {
           {index === current && slide}
         </div>
       ))}
-      <button onClick={nextSlider}>
+      <button
+        style={{ border: "none", backgroundColor: "transparent" }}
+        onClick={nextSlider}
+      >
         <Icon
           disabled
           size="huge"

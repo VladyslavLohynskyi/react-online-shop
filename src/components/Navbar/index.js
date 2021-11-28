@@ -1,8 +1,6 @@
-import useWindowSize from "../hooks/useWindowSize";
 import "./index.css";
 
 const Navbar = ({ className }) => {
-  const [width, hieght] = useWindowSize();
   return (
     <ul className={className}>
       <li>

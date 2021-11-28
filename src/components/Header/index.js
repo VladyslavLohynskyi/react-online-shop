@@ -5,7 +5,7 @@ import Navbar from "../Navbar";
 
 const Header = () => {
   const [click, setClick] = useState(false);
-  const [width, hieght] = useWindowSize();
+  const width = useWindowSize()[0];
   const handleClickBurger = () => {
     click ? setClick(false) : setClick(true);
   };
