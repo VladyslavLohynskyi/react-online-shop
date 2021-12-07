@@ -1,9 +1,10 @@
 import Carrousel from "../Carrousel";
 import Products from "../Products";
+
 const Section = () => {
   return (
     <div>
-      <Carrousel />
+      <Carrousel main={true} />
       <Products />
     </div>
   );

@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import "semantic-ui-css/semantic.min.css";
 import { Icon } from "semantic-ui-react";
 import "./index.css";
-const Carrousel = () => {
+const Carrousel = ({ main, product }) => {
   const [current, setCurrent] = useState(0);
 
-  const slides = [
+  let slides = [
     <div>
       <h2>
         Welcome to <br /> Stickerz
