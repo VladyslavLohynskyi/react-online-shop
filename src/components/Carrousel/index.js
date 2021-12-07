@@ -19,6 +19,9 @@ const Carrousel = ({ main, product }) => {
     <img src={process.env.PUBLIC_URL + "/assets/baby-yoda.svg"} />,
     <img src={process.env.PUBLIC_URL + "/assets/girl.svg"} />,
   ];
+  if (!main) {
+    slides = product.additionalImages.map((el) => <img src={el} />);
+  }
 
   const nextSlider = () => {
     if (current === slides.length - 1) {
