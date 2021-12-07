@@ -1,25 +1,19 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import "./index.css";
 import useWindowSize from "../hooks/useWindowSize";
+import data from "../../products.json";
 
 const Products = () => {
   const width = useWindowSize()[0];
+  const [buttonValue, setButtonValue] = useState({
+    ascending: false,
+    descending: false,
+  });
   const [productList, setProductList] = useState([]);
-  useEffect(
-    () => async () => await showProductList(),
-    [productList, setProductList]
-  );
-  const showProductList = () =>
-    axios
-      .get("./products.json")
-      .then((response) => {
-        setProductList(response.data);
-      })
-      .catch((err) => {
-        // Do something for an error here
-        console.log("Error Reading data " + err);
-      }, []);
+  const [sortedProductList, setSortedProductList] = useState([]);
+  useEffect(() => setProductList([...data]), []);
+
   const currentGrid = () => {
     if (width <= 574) {
       return 1;
@@ -32,30 +26,52 @@ const Products = () => {
     }
     return 4;
   };
+  const defaultProduct = (product) => (
+    <div key={product.id} className="product-card">
+      <img src={process.env.PUBLIC_URL + product.image} alt={product.title} />
+      <div>
+        <h3>{product.title}</h3>
+        <p>{product.description}</p>
+        <div className="card-buttons">
+          <button className="button-info">Info</button>
+          <button className="button-buy">${product.price} - buy</button>
+        </div>
+      </div>
+    </div>
+  );
+  const sortAscendingButton = () => {
+    setButtonValue({ ascending: true, descending: false });
+    setSortedProductList(
+      productList.concat().sort((a, b) => a.price - b.price)
+    );
+  };
+
+  const sortDescendingButton = () => {
+    setButtonValue({ ascending: false, descending: true });
+    setSortedProductList(
+      productList.concat().sort((a, b) => b.price - a.price)
+    );
+  };
+
+  const outputProducts = () => {
+    if (buttonValue.ascending === true && buttonValue.descending === false) {
+      return sortedProductList.map((product) => defaultProduct(product));
+    }
+    if (buttonValue.ascending === false && buttonValue.descending === true) {
+      return sortedProductList.map((product) => defaultProduct(product));
+    }
+    return productList.map((product) => defaultProduct(product));
+  };
 
   return (
     <div>
       <h3>Products</h3>
       <div>
-        <button>Filter1</button>
-        <button>Filter2</button>
+        <button onClick={sortAscendingButton}>Ascending button</button>
+        <button onClick={sortDescendingButton}>Descending button</button>
         <input type="text" />
       </div>
-      <div className={`product-list${currentGrid()}`}>
-        {productList.map((el) => (
-          <div key={el.id} className="product-card">
-            <img src={el.image} alt={el.title} />
-            <div>
-              <h3>{el.title}</h3>
-              <p>{el.description}</p>
-              <div className="card-buttons">
-                <button className="button-info">Info</button>
-                <button className="button-buy">${el.price} - buy</button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <div className={`product-list${currentGrid()}`}>{outputProducts()}</div>
     </div>
   );
 };

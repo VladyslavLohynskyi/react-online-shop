@@ -11,7 +11,7 @@ const Header = () => {
   };
   return (
     <div className="header-burger-nav">
-      <div class="header">
+      <div className="header">
         <h1>Stickerz</h1>
         <nav>
           {width > 720 ? <Navbar className="navbar-standart" /> : null}

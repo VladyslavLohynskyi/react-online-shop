@@ -16,8 +16,8 @@ const Carrousel = () => {
       <p>Buy with discount today</p>
       <button>Start shopping</button>
     </div>,
-    <img src="/assets/baby-yoda.svg" />,
-    <img src="../assets/girl.svg" s />,
+    <img src={process.env.PUBLIC_URL + "/assets/baby-yoda.svg"} />,
+    <img src={process.env.PUBLIC_URL + "/assets/girl.svg"} />,
   ];
 
   const nextSlider = () => {
