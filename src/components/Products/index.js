@@ -35,7 +35,7 @@ const Products = () => {
         })
       );
     }
-  }, [inputValue]);
+  }, [inputValue, productList]);
 
   const changeHandler = (event) => {
     if (event.target.value.length > 2) {
@@ -52,7 +52,7 @@ const Products = () => {
     return () => {
       debouncedChangeHandler.cancel();
     };
-  }, []);
+  }, [debouncedChangeHandler]);
 
   const sortAscendingButton = () => {
     setSortedProductList(
@@ -83,7 +83,7 @@ const Products = () => {
       </div>
       <div className={`product-list${currentGrid()}`}>
         {outputProducts().map((product) => (
-          <Product product={product} />
+          <Product key={product.id} product={product} />
         ))}
       </div>
     </div>

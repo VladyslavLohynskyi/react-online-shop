@@ -1,12 +1,12 @@
 import "./index.css";
 import Modal from "../Modal";
-import { useState, useEffect, useMemo } from "react";
+import { useState } from "react";
 
 const Product = ({ product }) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <div>
-      <div key={product.id} className="product-card">
+      <div className="product-card">
         <img src={process.env.PUBLIC_URL + product.image} alt={product.title} />
         <div>
           <h3>{product.title}</h3>

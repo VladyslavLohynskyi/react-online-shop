@@ -16,11 +16,14 @@ const Carrousel = ({ main, product }) => {
       <p>Buy with discount today</p>
       <button>Start shopping</button>
     </div>,
-    <img src={process.env.PUBLIC_URL + "/assets/baby-yoda.svg"} />,
-    <img src={process.env.PUBLIC_URL + "/assets/girl.svg"} />,
+    <img
+      src={process.env.PUBLIC_URL + "/assets/baby-yoda.svg"}
+      alt="Baby Yoda"
+    />,
+    <img src={process.env.PUBLIC_URL + "/assets/girl.svg"} alt="Girl" />,
   ];
   if (!main) {
-    slides = product.additionalImages.map((el) => <img src={el} />);
+    slides = product.additionalImages.map((el) => <img src={el} alt="Cats" />);
   }
 
   const nextSlider = () => {

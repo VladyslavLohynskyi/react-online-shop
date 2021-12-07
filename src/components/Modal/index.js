@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "./index.css";
 import Carrousel from "../Carrousel";
 const Modal = ({ product, show, onClose }) => {
