@@ -1,15 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import "./index.css";
 import useWindowSize from "../hooks/useWindowSize";
 import data from "../../products.json";
+import debounce from "lodash.debounce";
 
 const Products = () => {
   const width = useWindowSize()[0];
   const [buttonValue, setButtonValue] = useState({
     ascending: false,
     descending: false,
+    input: false,
   });
+  const [inputValue, setInputValue] = useState("");
+  const [searchInputs, setSearchInputs] = useState([]);
   const [productList, setProductList] = useState([]);
   const [sortedProductList, setSortedProductList] = useState([]);
   useEffect(() => setProductList([...data]), []);
@@ -26,6 +30,39 @@ const Products = () => {
     }
     return 4;
   };
+
+  useEffect(() => {
+    if (inputValue !== "") {
+      setSearchInputs(
+        productList.filter((el) => {
+          return el.title.toLowerCase().includes(inputValue.toLowerCase());
+        })
+      );
+    }
+  }, [inputValue]);
+
+  const changeHandler = (event) => {
+    if (event.target.value.length > 2) {
+      setButtonValue({
+        ascending: false,
+        descending: false,
+        input: true,
+      });
+      setInputValue(event.target.value);
+    }
+  };
+
+  const debouncedChangeHandler = useMemo(
+    () => debounce(changeHandler, 1000),
+    []
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedChangeHandler.cancel();
+    };
+  }, []);
+
   const defaultProduct = (product) => (
     <div key={product.id} className="product-card">
       <img src={process.env.PUBLIC_URL + product.image} alt={product.title} />
@@ -40,25 +77,40 @@ const Products = () => {
     </div>
   );
   const sortAscendingButton = () => {
-    setButtonValue({ ascending: true, descending: false });
+    setButtonValue({ ascending: true, descending: false, input: false });
     setSortedProductList(
       productList.concat().sort((a, b) => a.price - b.price)
     );
   };
 
   const sortDescendingButton = () => {
-    setButtonValue({ ascending: false, descending: true });
+    setButtonValue({ ascending: false, descending: true, input: false });
     setSortedProductList(
       productList.concat().sort((a, b) => b.price - a.price)
     );
   };
 
   const outputProducts = () => {
-    if (buttonValue.ascending === true && buttonValue.descending === false) {
+    if (
+      buttonValue.ascending &&
+      !buttonValue.descending &&
+      !buttonValue.input
+    ) {
       return sortedProductList.map((product) => defaultProduct(product));
     }
-    if (buttonValue.ascending === false && buttonValue.descending === true) {
+    if (
+      !buttonValue.ascending &&
+      buttonValue.descending &&
+      !buttonValue.input
+    ) {
       return sortedProductList.map((product) => defaultProduct(product));
+    }
+    if (
+      !buttonValue.ascending &&
+      !buttonValue.descending &&
+      buttonValue.input
+    ) {
+      return searchInputs.map((product) => defaultProduct(product));
     }
     return productList.map((product) => defaultProduct(product));
   };
@@ -69,7 +121,7 @@ const Products = () => {
       <div>
         <button onClick={sortAscendingButton}>Ascending button</button>
         <button onClick={sortDescendingButton}>Descending button</button>
-        <input type="text" />
+        <input type="text" onChange={debouncedChangeHandler} />
       </div>
       <div className={`product-list${currentGrid()}`}>{outputProducts()}</div>
     </div>
