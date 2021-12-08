@@ -1,12 +1,32 @@
 import Header from "../Header";
 import Section from "../Section";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cart from "../Cart";
 import "./index.css";
 
 function App() {
   const [showCartModal, setShowCartModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  useEffect(() => {
+    getLocalStorage();
+  }, []);
+
+  useEffect(() => {
+    savelocalStorage();
+  }, [cartItems]);
+
+  const savelocalStorage = () => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  };
+
+  const getLocalStorage = () => {
+    if (localStorage.getItem("cartItems") === null) {
+      localStorage.setItem("cartItems", JSON.stringify([]));
+    } else {
+      let todoLocal = JSON.parse(localStorage.getItem("cartItems"));
+      setCartItems(todoLocal);
+    }
+  };
 
   const onAddCart = (product) => {
     const exist = cartItems.find((el) => el.id === product.id);
