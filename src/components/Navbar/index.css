@@ -4,7 +4,7 @@
 
 .navbar-standart {
   margin-left: 50px;
-  width: 200px;
+  width: 300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,4 +27,13 @@
 .cart-button {
   cursor: pointer;
   color: #0d6efd;
+  display: flex;
+}
+
+.cart-badget {
+  margin: 0px 5px;
+  padding: 0px 5px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: black;
 }

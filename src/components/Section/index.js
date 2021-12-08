@@ -1,11 +1,11 @@
 import Carrousel from "../Carrousel";
 import Products from "../Products";
 
-const Section = () => {
+const Section = ({ onAddCart }) => {
   return (
     <div>
       <Carrousel main={true} />
-      <Products />
+      <Products onAddCart={onAddCart} />
     </div>
   );
 };

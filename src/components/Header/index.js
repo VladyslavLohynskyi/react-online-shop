@@ -3,7 +3,7 @@ import { useState } from "react";
 import useWindowSize from "../hooks/useWindowSize";
 import Navbar from "../Navbar";
 
-const Header = ({ onOpenCart }) => {
+const Header = ({ onOpenCart, cartItems }) => {
   const [click, setClick] = useState(false);
   const width = useWindowSize()[0];
   const handleClickBurger = () => {
@@ -15,7 +15,11 @@ const Header = ({ onOpenCart }) => {
         <h1>Stickerz</h1>
         <nav>
           {width > 720 ? (
-            <Navbar onOpenCart={onOpenCart} className="navbar-standart" />
+            <Navbar
+              onOpenCart={onOpenCart}
+              cartItems={cartItems}
+              className="navbar-standart"
+            />
           ) : null}
           <div className="box" onClick={handleClickBurger}>
             <div className="burger"></div>
@@ -23,7 +27,11 @@ const Header = ({ onOpenCart }) => {
         </nav>
       </div>
       {width <= 720 && click ? (
-        <Navbar onOpenCart={onOpenCart} className="navbar-burger" />
+        <Navbar
+          onOpenCart={onOpenCart}
+          cartItems={cartItems}
+          className="navbar-burger"
+        />
       ) : null}
     </div>
   );

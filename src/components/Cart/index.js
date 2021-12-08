@@ -1,7 +1,19 @@
-import { useEffect } from "react";
 import "./index.css";
 
-const Cart = ({ showCartModal, onCloseCart }) => {
+import "semantic-ui-css/semantic.min.css";
+import { Icon } from "semantic-ui-react";
+
+const Cart = ({
+  showCartModal,
+  onCloseCart,
+  cartItems,
+  onAddCart,
+  onRemoveCart,
+}) => {
+  const total = cartItems.reduce(
+    (acc, cur) => acc + cur.price * cur.quantity,
+    0
+  );
   return (
     <div
       className={!showCartModal ? "display-none modal" : "modal"}
@@ -18,9 +30,42 @@ const Cart = ({ showCartModal, onCloseCart }) => {
               <p>Product</p>
               <p>Price</p>
               <p>Quantity</p>
+              <p />
             </div>
-            <div className="cart-product-list">Products</div>
-            <div className="total">Total</div>
+            <div className="cart-product-list">
+              {cartItems.map((el) => (
+                <div key={el.id} className="cart-product">
+                  <p>{el.title}</p>
+                  <p>{el.price}</p>
+                  <p>{el.quantity}</p>
+                  <div>
+                    <button
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                      onClick={() => onAddCart(el)}
+                    >
+                      <Icon
+                        disabled
+                        size="small"
+                        className="icon"
+                        name="plus"
+                      />
+                    </button>
+                    <button
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                      onClick={() => onRemoveCart(el)}
+                    >
+                      <Icon
+                        disabled
+                        size="small"
+                        className="icon"
+                        name="minus"
+                      />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="total">Total ${total.toFixed(2)}</div>
           </div>
           <form className="cart-form">
             <label htmlFor="name">Your name:</label>

@@ -2,7 +2,7 @@ import "./index.css";
 import Modal from "../Modal";
 import { useState } from "react";
 
-const Product = ({ product }) => {
+const Product = ({ product, onAddCart }) => {
   const [showModal, setShowModal] = useState(false);
   return (
     <div>
@@ -15,7 +15,9 @@ const Product = ({ product }) => {
             <button className="button-info" onClick={() => setShowModal(true)}>
               Info
             </button>
-            <button className="button-buy">${product.price} - buy</button>
+            <button className="button-buy" onClick={() => onAddCart(product)}>
+              ${product.price} - buy
+            </button>
           </div>
         </div>
       </div>

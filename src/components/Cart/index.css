@@ -5,7 +5,7 @@
 
 .title-cart {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
 }
 .cart-footer {
   width: 100%;
@@ -26,4 +26,9 @@
 
 .display-none {
   display: none;
+}
+
+.cart-product {
+  display: flex;
+  justify-content: space-between;
 }
