@@ -1,6 +1,6 @@
 import "./index.css";
 
-const Navbar = ({ className }) => {
+const Navbar = ({ className, onOpenCart }) => {
   return (
     <ul className={className}>
       <li>
@@ -12,7 +12,9 @@ const Navbar = ({ className }) => {
       <li>
         <a href="#">contacts</a>
       </li>
-      <li>Cart</li>
+      <li className="cart-button" onClick={() => onOpenCart()}>
+        Cart
+      </li>
     </ul>
   );
 };

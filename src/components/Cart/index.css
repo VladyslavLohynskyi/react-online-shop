@@ -1,0 +1,29 @@
+.cart-products {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-cart {
+  display: flex;
+  flex-direction: row;
+}
+.cart-footer {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+}
+.cart-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-body {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-top: 1px solid #eee;
+}
+
+.display-none {
+  display: none;
+}

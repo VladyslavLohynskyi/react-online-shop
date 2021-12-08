@@ -57,7 +57,8 @@ const Carrousel = ({ main, product }) => {
         <Icon
           disabled
           size="huge"
-          style={{ cursor: "pointer", float: "right" }}
+          style={{ float: "right" }}
+          className="icon"
           name="angle left"
         />
       </button>
@@ -73,12 +74,7 @@ const Carrousel = ({ main, product }) => {
         style={{ border: "none", backgroundColor: "transparent" }}
         onClick={nextSlider}
       >
-        <Icon
-          disabled
-          size="huge"
-          style={{ cursor: "pointer" }}
-          name="angle right"
-        />
+        <Icon disabled size="huge" className="icon" name="angle right" />
       </button>
     </div>
   );

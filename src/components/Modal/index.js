@@ -13,7 +13,6 @@ const Modal = ({ product, show, onClose }) => {
           <button onClick={onClose}>Close</button>
         </div>
         <div className="modal-body">
-          {" "}
           <Carrousel main={false} product={product} />
           <h3>{product.title}</h3>
           <p>{product.description}</p>

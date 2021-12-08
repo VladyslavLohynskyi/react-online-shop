@@ -24,3 +24,7 @@
 .navbar-burger li {
   padding: 10px 0px 10px 0px;
 }
+.cart-button {
+  cursor: pointer;
+  color: #0d6efd;
+}

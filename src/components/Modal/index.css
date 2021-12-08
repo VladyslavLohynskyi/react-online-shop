@@ -11,6 +11,8 @@
 }
 
 .modal-content {
+  display: flex;
+  flex-direction: column;
   border: 1px solid black;
   border-radius: 6px;
   width: 550px;
@@ -25,6 +27,8 @@
 }
 
 .modal-body {
+  display: flex;
+  flex-direction: column;
   padding: 10px;
   border-top: 1px solid #eee;
 }
