@@ -3,6 +3,7 @@ import Section from "../Section";
 import { useState, useEffect } from "react";
 import Cart from "../Cart";
 import "./index.css";
+import Footer from "../Footer";
 
 function App() {
   const [showCartModal, setShowCartModal] = useState(false);
@@ -60,6 +61,7 @@ function App() {
         cartItems={cartItems}
       ></Header>
       <Section onAddCart={onAddCart} />
+      <Footer />
       <Cart
         showCartModal={showCartModal}
         onCloseCart={() => setShowCartModal(false)}
