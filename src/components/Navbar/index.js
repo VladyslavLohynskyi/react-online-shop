@@ -1,4 +1,5 @@
 import "./index.css";
+import { HashLink as Link } from "react-router-hash-link";
 
 const Navbar = ({ className, onOpenCart, cartItems }) => {
   const countCartItems = cartItems.reduce((acc, cur) => acc + cur.quantity, 0);
@@ -9,13 +10,13 @@ const Navbar = ({ className, onOpenCart, cartItems }) => {
   return (
     <ul className={className}>
       <li>
-        <a href="#">Home</a>
+        <Link to="/#home">Home</Link>
       </li>
       <li>
-        <a href="#">Products</a>
+        <Link to="/#products">Products</Link>
       </li>
       <li>
-        <a href="#">contacts</a>
+        <Link to="/#contacts">Contacts</Link>
       </li>
       <li
         className={

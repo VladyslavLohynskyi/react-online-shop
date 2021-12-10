@@ -1,7 +1,5 @@
 import "./index.css";
 
-import "semantic-ui-css/semantic.min.css";
-import { Icon } from "semantic-ui-react";
 import CartItem from "../CartItem";
 
 const Cart = ({

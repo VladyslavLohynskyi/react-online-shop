@@ -74,7 +74,7 @@ const Products = ({ onAddCart }) => {
   };
 
   return (
-    <div>
+    <div id={"products"}>
       <h3>Products</h3>
       <div>
         <button onClick={sortAscendingButton}>Ascending button</button>

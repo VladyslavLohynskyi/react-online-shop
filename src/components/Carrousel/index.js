@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { HashLink as Link } from "react-router-hash-link";
 
 import "semantic-ui-css/semantic.min.css";
 import { Icon } from "semantic-ui-react";
@@ -14,7 +15,9 @@ const Carrousel = ({ main, product }) => {
       <h3>Best sticker in world</h3>
       <hr />
       <p>Buy with discount today</p>
-      <button>Start shopping</button>
+      <button>
+        <Link to="/#products">Start shopping</Link>
+      </button>
     </div>,
     <img
       src={process.env.PUBLIC_URL + "/assets/baby-yoda.svg"}

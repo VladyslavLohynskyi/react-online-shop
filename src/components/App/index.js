@@ -60,8 +60,8 @@ function App() {
         onOpenCart={() => setShowCartModal(true)}
         cartItems={cartItems}
       ></Header>
-      <Section onAddCart={onAddCart} />
-      <Footer />
+      <Section id={"home"} onAddCart={onAddCart} />
+      <Footer id={"contacts"} />
       <Cart
         showCartModal={showCartModal}
         onCloseCart={() => setShowCartModal(false)}

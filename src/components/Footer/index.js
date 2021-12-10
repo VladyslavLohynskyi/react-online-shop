@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div>
+    <div id={"contacts"}>
       <h3>Contact Us</h3>
       <p>
         Copyright by{" "}
