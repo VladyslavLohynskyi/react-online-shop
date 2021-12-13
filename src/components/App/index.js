@@ -2,6 +2,7 @@ import Header from "../Header";
 import Section from "../Section";
 import { useState, useEffect } from "react";
 import Cart from "../Cart";
+import SuccessAlert from "../SuccessAlert";
 import "./index.css";
 import Footer from "../Footer";
 
@@ -11,14 +12,9 @@ function App() {
   useEffect(() => {
     getLocalStorage();
   }, []);
-
   useEffect(() => {
-    savelocalStorage();
-  }, [cartItems]);
-
-  const savelocalStorage = () => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  };
+  }, [cartItems]);
 
   const getLocalStorage = () => {
     if (localStorage.getItem("cartItems") === null) {
@@ -69,6 +65,7 @@ function App() {
         onAddCart={onAddCart}
         onRemoveCart={onRemoveCart}
       />
+      <SuccessAlert />
     </div>
   );
 }
