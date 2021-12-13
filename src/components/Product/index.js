@@ -1,9 +1,11 @@
 import "./index.css";
 import Modal from "../Modal";
+import SuccessAlert from "../SuccessAlert";
 import { useState } from "react";
 
 const Product = ({ product, onAddCart }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   return (
     <div>
       <div className="product-card">
@@ -15,7 +17,13 @@ const Product = ({ product, onAddCart }) => {
             <button className="button-info" onClick={() => setShowModal(true)}>
               Info
             </button>
-            <button className="button-buy" onClick={() => onAddCart(product)}>
+            <button
+              className="button-buy"
+              onClick={() => {
+                onAddCart(product);
+                setShowSuccessModal(true);
+              }}
+            >
               ${product.price} - buy
             </button>
           </div>
@@ -25,6 +33,10 @@ const Product = ({ product, onAddCart }) => {
         product={product}
         show={showModal}
         onClose={() => setShowModal(false)}
+      />
+      <SuccessAlert
+        show={showSuccessModal}
+        onCloseSuccess={() => setShowSuccessModal(false)}
       />
     </div>
   );

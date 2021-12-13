@@ -1,14 +1,29 @@
 import "./index.css";
 
-const SuccessAlert = ({ show }) => {
+const SuccessAlert = ({ show, onCloseSuccess }) => {
   if (!show) {
     return null;
   }
+
+  const timer = setTimeout(() => onCloseSuccess(), 3000);
+  function startTimer() {
+    if (show) {
+      return timer;
+    }
+  }
+  startTimer();
+
   return (
-    <div className="modalAlert">
-      <div className="modal-contentAlert" onClick={(e) => e.stopPropagation()}>
+    <div className="modalAlert" onClick={() => onCloseSuccess()}>
+      <div
+        className="modal-contentAlert"
+        onClick={(e) => {
+          e.stopPropagation();
+          clearTimeout(timer);
+        }}
+      >
         <h3>Product added to cart</h3>
-        <button>Close</button>
+        <button onClick={() => onCloseSuccess()}>Close</button>
       </div>
     </div>
   );

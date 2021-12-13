@@ -2,12 +2,13 @@ import Header from "../Header";
 import Section from "../Section";
 import { useState, useEffect } from "react";
 import Cart from "../Cart";
-import SuccessAlert from "../SuccessAlert";
+
 import "./index.css";
 import Footer from "../Footer";
 
 function App() {
   const [showCartModal, setShowCartModal] = useState(false);
+
   const [cartItems, setCartItems] = useState([]);
   useEffect(() => {
     getLocalStorage();
@@ -65,7 +66,6 @@ function App() {
         onAddCart={onAddCart}
         onRemoveCart={onRemoveCart}
       />
-      <SuccessAlert />
     </div>
   );
 }
