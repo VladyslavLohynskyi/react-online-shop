@@ -1,31 +1,31 @@
 import "./index.css";
 import CartItem from "../CartItem";
-import { addCart, removeCart } from "../../actions";
+import { closeCart } from "../../actions";
 import { connect } from "react-redux";
 const mapState = (state) => {
   return {
     cart: state.cart,
+    showCart: state.showCart,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
-    addCart: (product) => dispatch(addCart(product)),
-    removeCart: (product) => dispatch(removeCart(product)),
+    closeCart: () => dispatch(closeCart()),
   };
 };
 
-const Cart = ({ showCartModal, onCloseCart, cart }) => {
+const Cart = ({ showCart, closeCart, cart }) => {
   const total = cart.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
   return (
     <div
-      className={!showCartModal ? "display-none modal" : "modal"}
-      onClick={onCloseCart}
+      className={!showCart ? "display-none modal" : "modal"}
+      onClick={closeCart}
     >
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h4 className="modal-title">Cart</h4>
-          <button onClick={onCloseCart}>Close</button>
+          <button onClick={closeCart}>Close</button>
         </div>
         <div className="cart-body">
           <div className="cart-products">
@@ -50,8 +50,8 @@ const Cart = ({ showCartModal, onCloseCart, cart }) => {
           </form>
         </div>
         <div className="cart-footer">
-          <button onClick={onCloseCart}>Close</button>
-          <button onClick={onCloseCart}>Order</button>
+          <button onClick={closeCart}>Close</button>
+          <button onClick={closeCart}>Order</button>
         </div>
       </div>
     </div>

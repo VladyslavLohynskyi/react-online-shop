@@ -28,6 +28,20 @@ function cartReducer(state = [], action) {
   }
 }
 
+function showCartReducer(state = [], action) {
+  switch (action.type) {
+    case "OPEN_CART": {
+      return true;
+    }
+    case "CLOSE_CART": {
+      return false;
+    }
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   cart: cartReducer,
+  showCart: showCartReducer,
 });

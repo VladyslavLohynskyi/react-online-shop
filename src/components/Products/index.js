@@ -6,7 +6,7 @@ import useWindowSize from "../hooks/useWindowSize";
 import data from "../../products.json";
 import debounce from "lodash.debounce";
 
-const Products = ({ onAddCart, onOpenSuccess }) => {
+const Products = ({ onOpenSuccess }) => {
   const width = useWindowSize()[0];
   const [inputValue, setInputValue] = useState("");
   const [productList, setProductList] = useState([]);
@@ -84,7 +84,6 @@ const Products = ({ onAddCart, onOpenSuccess }) => {
       <div className={`product-list${currentGrid()}`}>
         {outputProducts().map((product) => (
           <Product
-            onAddCart={onAddCart}
             key={product.id}
             product={product}
             onOpenSuccess={onOpenSuccess}
