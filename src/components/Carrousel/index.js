@@ -4,6 +4,7 @@ import { HashLink as Link } from "react-router-hash-link";
 import "semantic-ui-css/semantic.min.css";
 import { Icon } from "semantic-ui-react";
 import "./index.css";
+
 const Carrousel = ({ main, product }) => {
   const [current, setCurrent] = useState(0);
 

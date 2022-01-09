@@ -2,8 +2,22 @@ import "./index.css";
 import Modal from "../Modal";
 import SuccessAlert from "../SuccessAlert";
 import { useState } from "react";
+import { addCart } from "../../actions";
+import { connect } from "react-redux";
 
-const Product = ({ product, onAddCart }) => {
+const mapDispatch = (dispatch) => {
+  return {
+    addCart: (product) => dispatch(addCart(product)),
+  };
+};
+
+const mapState = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
+
+const Product = ({ product, addCart }) => {
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   return (
@@ -20,7 +34,7 @@ const Product = ({ product, onAddCart }) => {
             <button
               className="button-buy"
               onClick={() => {
-                onAddCart(product);
+                addCart(product);
                 setShowSuccessModal(true);
               }}
             >
@@ -42,4 +56,4 @@ const Product = ({ product, onAddCart }) => {
   );
 };
 
-export default Product;
+export default connect(mapState, mapDispatch)(Product);

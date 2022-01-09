@@ -1,27 +1,31 @@
 import "./index.css";
-
 import CartItem from "../CartItem";
+import { closeCart } from "../../actions";
+import { connect } from "react-redux";
+const mapState = (state) => {
+  return {
+    cart: state.cart,
+    showCart: state.showCart,
+  };
+};
 
-const Cart = ({
-  showCartModal,
-  onCloseCart,
-  cartItems,
-  onAddCart,
-  onRemoveCart,
-}) => {
-  const total = cartItems.reduce(
-    (acc, cur) => acc + cur.price * cur.quantity,
-    0
-  );
+const mapDispatch = (dispatch) => {
+  return {
+    closeCart: () => dispatch(closeCart()),
+  };
+};
+
+const Cart = ({ showCart, closeCart, cart }) => {
+  const total = cart.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
   return (
     <div
-      className={!showCartModal ? "display-none modal" : "modal"}
-      onClick={onCloseCart}
+      className={!showCart ? "display-none modal" : "modal"}
+      onClick={closeCart}
     >
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h4 className="modal-title">Cart</h4>
-          <button onClick={onCloseCart}>Close</button>
+          <button onClick={closeCart}>Close</button>
         </div>
         <div className="cart-body">
           <div className="cart-products">
@@ -32,13 +36,8 @@ const Cart = ({
               <p />
             </div>
             <div className="cart-product-list">
-              {cartItems.map((el) => (
-                <CartItem
-                  key={el.id}
-                  el={el}
-                  onAddCart={onAddCart}
-                  onRemoveCart={onRemoveCart}
-                />
+              {cart.map((el) => (
+                <CartItem key={el.id} el={el} />
               ))}
             </div>
             <div className="total">Total ${total.toFixed(2)}</div>
@@ -51,12 +50,12 @@ const Cart = ({
           </form>
         </div>
         <div className="cart-footer">
-          <button onClick={onCloseCart}>Close</button>
-          <button onClick={onCloseCart}>Order</button>
+          <button onClick={closeCart}>Close</button>
+          <button onClick={closeCart}>Order</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default Cart;
+export default connect(mapState, mapDispatch)(Cart);

@@ -1,10 +1,24 @@
 import "./index.css";
 import { HashLink as Link } from "react-router-hash-link";
+import { connect } from "react-redux";
+import { openCart } from "../../actions";
 
-const Navbar = ({ className, onOpenCart, cartItems }) => {
-  const countCartItems = cartItems.reduce((acc, cur) => acc + cur.quantity, 0);
+const mapState = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
 
-  const countCartPrice = cartItems
+const mapDispatch = (dispatch) => {
+  return {
+    openCart: () => dispatch(openCart()),
+  };
+};
+
+const Navbar = ({ className, cart, openCart }) => {
+  const countCartItems = cart.reduce((acc, cur) => acc + cur.quantity, 0);
+
+  const countCartPrice = cart
     .reduce((acc, cur) => acc + cur.price * cur.quantity, 0)
     .toFixed(2);
   return (
@@ -20,9 +34,9 @@ const Navbar = ({ className, onOpenCart, cartItems }) => {
       </li>
       <li
         className={
-          cartItems.length === 0 ? "display-none cart-button" : "cart-button"
+          cart.length === 0 ? "display-none cart-button" : "cart-button"
         }
-        onClick={() => onOpenCart()}
+        onClick={() => openCart()}
       >
         Cart{" "}
         <div className="cart-badget">
@@ -33,4 +47,4 @@ const Navbar = ({ className, onOpenCart, cartItems }) => {
   );
 };
 
-export default Navbar;
+export default connect(mapState, mapDispatch)(Navbar);
