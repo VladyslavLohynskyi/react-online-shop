@@ -1,18 +1,22 @@
 import "./index.css";
-
 import CartItem from "../CartItem";
+import { addCart, removeCart } from "../../actions";
+import { connect } from "react-redux";
+const mapState = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
 
-const Cart = ({
-  showCartModal,
-  onCloseCart,
-  cartItems,
-  onAddCart,
-  onRemoveCart,
-}) => {
-  const total = cartItems.reduce(
-    (acc, cur) => acc + cur.price * cur.quantity,
-    0
-  );
+const mapDispatch = (dispatch) => {
+  return {
+    addCart: (product) => dispatch(addCart(product)),
+    removeCart: (product) => dispatch(removeCart(product)),
+  };
+};
+
+const Cart = ({ showCartModal, onCloseCart, cart }) => {
+  const total = cart.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
   return (
     <div
       className={!showCartModal ? "display-none modal" : "modal"}
@@ -32,13 +36,8 @@ const Cart = ({
               <p />
             </div>
             <div className="cart-product-list">
-              {cartItems.map((el) => (
-                <CartItem
-                  key={el.id}
-                  el={el}
-                  onAddCart={onAddCart}
-                  onRemoveCart={onRemoveCart}
-                />
+              {cart.map((el) => (
+                <CartItem key={el.id} el={el} />
               ))}
             </div>
             <div className="total">Total ${total.toFixed(2)}</div>
@@ -59,4 +58,4 @@ const Cart = ({
   );
 };
 
-export default Cart;
+export default connect(mapState, mapDispatch)(Cart);

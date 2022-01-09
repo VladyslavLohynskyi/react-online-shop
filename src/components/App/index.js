@@ -26,45 +26,14 @@ function App() {
     }
   };
 
-  const onAddCart = (product) => {
-    const exist = cartItems.find((el) => el.id === product.id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((el) =>
-          el.id === product.id ? { ...exist, quantity: exist.quantity + 1 } : el
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
-    }
-  };
-
-  const onRemoveCart = (product) => {
-    const exist = cartItems.find((el) => el.id === product.id);
-    if (exist.quantity === 1) {
-      setCartItems(cartItems.filter((el) => el.id !== product.id));
-    } else {
-      setCartItems(
-        cartItems.map((el) =>
-          el.id === product.id ? { ...exist, quantity: exist.quantity - 1 } : el
-        )
-      );
-    }
-  };
   return (
     <div className="container">
-      <Header
-        onOpenCart={() => setShowCartModal(true)}
-        cartItems={cartItems}
-      ></Header>
-      <Section id={"home"} onAddCart={onAddCart} />
+      <Header onOpenCart={() => setShowCartModal(true)}></Header>
+      <Section id={"home"} />
       <Footer id={"contacts"} />
       <Cart
         showCartModal={showCartModal}
         onCloseCart={() => setShowCartModal(false)}
-        cartItems={cartItems}
-        onAddCart={onAddCart}
-        onRemoveCart={onRemoveCart}
       />
     </div>
   );
